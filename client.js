@@ -13,16 +13,24 @@ const connect = function () {
   conn.on("connect", () => {
     conn.write("Successfully connected to game server")
   })
-
+  
   conn.on("connect", () => {
     conn.write("Name: SLN")
   })
 
+  // setInterval(() => {
+  //   conn.write("Move: up");
+  // }, 50)
+  
+
+  
   // interpret incoming data as text
   conn.setEncoding("utf8");
-
+  
   return conn;
 };
+
+
 
 module.exports = {
   connect,
