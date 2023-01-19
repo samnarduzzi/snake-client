@@ -1,19 +1,32 @@
 let connection;
 
-  const handleUserInput = function (data) {
-    if (data === "w") {
+  const handleUserInput = function (key) {
+    if (key === "q") {
+      connection.write("q");
+      process.exit();
+    }
+  }; 
+
+  const movementInput = function(key) {
+    if (key === "w") {
         connection.write("Move: up")
-    } else if (data === "a") {
+    } 
+    if (key === "a") {
         connection.write("Move: left")
-    } else if (data === "s"){
+    }
+    if (key === "s"){
         connection.write("Move: down")
-    } else if (data === "d") {
+    }
+    if (key === "d") {
         connection.write("Move: right")
-    // } else if (data === "q") {
-    //   connection.write("q");
-    //   process.exit();
     }
   };
+
+  const sendMessage = function (key) {
+    if (key === "t") {
+      connection.write("Say: IM A SLITHERY SNAKE");
+    }
+  }
     
 const setupInput = function (conn) {
   connection = conn;
@@ -22,6 +35,8 @@ const setupInput = function (conn) {
   stdin.setEncoding("utf8");
   stdin.resume();
   stdin.on("data", handleUserInput)
+  stdin.on("data", movementInput)
+  stdin.on("data", sendMessage)
   return stdin;
 };
 
